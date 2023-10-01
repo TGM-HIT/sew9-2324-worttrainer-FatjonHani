@@ -7,8 +7,9 @@ public class Rechtschreibtrainer {
     private int richtig = 0;
     private int falsch = 0;
 
-    public Rechtschreibtrainer(){
-        this.wortPaar= new ArrayList<>();
+    public Rechtschreibtrainer(ArrayList wortPaar) {
+        wortPaar = new ArrayList();
+
     }
     public void statistik(boolean answer){
         if(answer == true){

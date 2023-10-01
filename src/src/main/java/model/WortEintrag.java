@@ -1,13 +1,22 @@
 package model;
+import javax.swing.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class WortEintrag {
-    private String url;
+    private URL url = new URL("https://www.computerhope.com/jargon/e/error.png") ;
     private String wort;
 
-    public WortEintrag(){
-        this.url =" ";
+    public WortEintrag() throws MalformedURLException {
         this.wort = "Hund";
     }
+    public WortEintrag(URL url, String wort) throws MalformedURLException {
+        setURL(url);
+        setWort(wort);
+    }
+
     public boolean urlChecker(String url){
         return false;
     }
@@ -19,19 +28,22 @@ public class WortEintrag {
         }
     }
 
-    public String getURL(){
+    public URL getURL(){
         if(this.url != null){
-            return this.wort;
+            return this.url;
         }else {
-            return "Error!";
+            return null;
         }
     }
+    public ImageIcon getImage() throws IOException {
+        return new ImageIcon(url);
+    }
 
-    public void setURL(String url){
+    public void setURL(URL url){
         if(url != null){
              this.url = url;
         }else {
-            this.url = "Error!";
+            this.url = null;
         }
     }
 
