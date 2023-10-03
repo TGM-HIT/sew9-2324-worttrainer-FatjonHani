@@ -9,7 +9,6 @@ public class Rechtschreibtrainer {
 
     public Rechtschreibtrainer(ArrayList wortPaar) {
         wortPaar = new ArrayList();
-
     }
     public void statistik(boolean answer){
         if(answer == true){
@@ -23,11 +22,12 @@ public class Rechtschreibtrainer {
                 +"Sie Haben: "+this.falsch+" falsch erraten!";
     }
 
-    public WortEintrag training(int index){
-
-        return null;
-
+    public WortEintrag getWortEintrag(int index){
+        return this.wortPaar.get(index);
     }
 
+    public WortEintrag getWortEintragZufall(){
+        return  null;
 
+    }
 }

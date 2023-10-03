@@ -18,9 +18,12 @@ public class WortEintrag {
     }
 
     public boolean urlChecker(String url){
+
         return false;
     }
+
     public String getWort(){
+
         if(this.wort != null){
             return this.wort;
         }else {
