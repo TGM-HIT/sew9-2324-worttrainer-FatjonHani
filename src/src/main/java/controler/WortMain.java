@@ -1,8 +1,6 @@
 package controler;
 
-import model.Rechtschreibtrainer;
-import model.WortEintrag;
-import model.WortSpeicher;
+import model.*;
 import org.json.JSONObject;
 import view.Anzeige;
 
@@ -36,7 +34,7 @@ public class WortMain {
         }catch (MalformedURLException e){
             e.printStackTrace();
         }
-        // Beispiel für die Verwendung der WortSpeicher-Klasse
+       /* // Beispiel für die Verwendung der WortSpeicher-Klasse
         WortSpeicher wortSpeicher = new WortSpeicher();
         wortSpeicher.addWordPair("Hund", new URL("https://static.nationalgeographic.de/files/styles/image_3200/public/01-domesticated-dog.jpg?w=400&h=400&q=75"));
         wortSpeicher.addWordPair("Katze", new URL("https://api.ardmediathek.de/image-service/images/urn:ard:image:3dab66faa8140d8b?w=448&ch=9e935de585dfb889"));
@@ -49,7 +47,17 @@ public class WortMain {
         // Verwendung der geladenen WortSpeicher
         JSONObject currentPair = loadedWortSpeicher.getCurrentWordPair();
         if (currentPair != null) {
-            System.out.println("Aktuelles Paar: " + currentPair);
+            System.out.println("Aktuelles Paar: " + currentPair);*/
+
+        // Create a Session with a FileSessionStorageStrategy
+        Session session = new Session(new FileSessionStorageStrategy());
+        session.save();
+        session.load();
+
+        // Switch to a DatabaseSessionStorageStrategy
+        session.setSessionStorageStrategy(new DatabaseSessionStorageStrategy());
+        session.save();
+        session.load();
         }
     }
-}
+

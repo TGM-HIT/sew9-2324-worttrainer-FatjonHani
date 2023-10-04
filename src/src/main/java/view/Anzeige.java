@@ -12,9 +12,9 @@ public class Anzeige {
 
     private Rechtschreibtrainer rechtschreibtrainer;
 
-    public Anzeige(Rechtschreibtrainer rechtschreibtrainer) {
+    public Anzeige(Rechtschreibtrainer rechtschreibtrainer){
       this.rechtschreibtrainer = rechtschreibtrainer;
-        anzeigen();
+      anzeigen();
     }
 
     private void anzeigen() {
