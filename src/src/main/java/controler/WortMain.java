@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class WortMain {
 
     public static void main(String[] args) {
-
+                    // rechtrainer fragen nach zuffäligem Worteinträgen und dann anzeigen
         try {
             URL url = new URL("https://static.nationalgeographic.de/files/styles/image_3200/public/01-domesticated-dog.jpg?w=400&h=400&q=75");
             URL url1 = new URL("https://api.ardmediathek.de/image-service/images/urn:ard:image:3dab66faa8140d8b?w=448&ch=9e935de585dfb889");
