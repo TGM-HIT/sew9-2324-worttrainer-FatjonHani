@@ -1,9 +1,10 @@
 package model;
 
-
 import org.json.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -21,10 +22,10 @@ public class WortSpeicher {
     }
 
     // Methoden zum Hinzufügen und Abrufen von Wort-Bild-Paaren
-    public void addWordPair(String word, String image) {
+    public void addWordPair(String word, URL image) {
         JSONObject pair = new JSONObject();
-        pair.put("word", word);
-        pair.put("image", image);
+        pair.put("Hund", word);
+        pair.put("https://static.nationalgeographic.de/files/styles/image_3200/public/01-domesticated-dog.jpg?w=400&h=400&q=75", image);
         wordPairs.put(pair);
     }
 
@@ -62,11 +63,11 @@ public class WortSpeicher {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         // Beispiel für die Verwendung der WortSpeicher-Klasse
         WortSpeicher wortSpeicher = new WortSpeicher();
-        wortSpeicher.addWordPair("Apfel", "apfel.jpg");
-        wortSpeicher.addWordPair("Banane", "banane.jpg");
+        wortSpeicher.addWordPair("Hund", new URL("https://static.nationalgeographic.de/files/styles/image_3200/public/01-domesticated-dog.jpg?w=400&h=400&q=75"));
+        wortSpeicher.addWordPair("Katze", new URL("https://api.ardmediathek.de/image-service/images/urn:ard:image:3dab66faa8140d8b?w=448&ch=9e935de585dfb889"));
         wortSpeicher.saveSession("wortSpeicher.json");
 
         // Laden der gespeicherten WortSpeicher
