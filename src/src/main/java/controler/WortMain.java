@@ -24,18 +24,12 @@ public class WortMain {
             ArrayList<WortEintrag> list = new ArrayList<>();
             list.add(hund);
             list.add(kazte);
-            list.add(maus);
 
+            list.add(maus);
             Rechtschreibtrainer rechtschreibtrainer = new Rechtschreibtrainer(list);
 
-
-            Anzeige anzeige = new Anzeige(hund.getURL());
-            Anzeige anzeige1 = new Anzeige(kazte.getURL());
-            Anzeige anzeige2 = new Anzeige(maus.getURL());
-
+            Anzeige anzeige = new Anzeige(rechtschreibtrainer);
             anzeige.anzeige();
-            anzeige1.anzeige();
-            anzeige2.anzeige();
 
         }catch (MalformedURLException e){
             e.printStackTrace();

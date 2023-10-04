@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Rechtschreibtrainer {
     private ArrayList<WortEintrag> wortPaar;
@@ -8,7 +9,7 @@ public class Rechtschreibtrainer {
     private int falsch = 0;
 
     public Rechtschreibtrainer(ArrayList wortPaar) {
-        wortPaar = new ArrayList();
+        this.wortPaar = wortPaar;
 
     }
     public void statistik(boolean answer){
@@ -19,14 +20,23 @@ public class Rechtschreibtrainer {
         }
     }
     public String printStatistik(){
-        return "Sie Haben: "+this.richtig+" richtig erraten! " +"/n"
+        return "Sie Haben: "+this.richtig+" richtig erraten! "
                 +"Sie Haben: "+this.falsch+" falsch erraten!";
     }
 
-    public WortEintrag training(int index){
+    public WortEintrag getWortEintrag(int index){
+         return this.wortPaar.get(index);
+    }
 
-        return null;
+    public WortEintrag getWortEintragZufall(){
+       int index;
+       Random random = new Random();
+       index = random.nextInt(wortPaar.size() - 0) +0;
+       return this.wortPaar.get(index);
+    }
 
+    public ArrayList getArrayList(){
+        return this.wortPaar;
     }
 
 

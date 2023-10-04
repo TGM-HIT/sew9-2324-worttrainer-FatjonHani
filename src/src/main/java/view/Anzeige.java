@@ -1,5 +1,7 @@
 package view;
 
+import model.Rechtschreibtrainer;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,10 +9,11 @@ import java.net.URL;
 
 public class Anzeige {
     private JFrame frame;
-    private URL imageUrl;
 
-    public Anzeige(URL imageUrl) {
-        this.imageUrl = imageUrl;
+    private Rechtschreibtrainer rechtschreibtrainer;
+
+    public Anzeige(Rechtschreibtrainer rechtschreibtrainer) {
+      this.rechtschreibtrainer = rechtschreibtrainer;
         anzeigen();
     }
 
@@ -23,22 +26,28 @@ public class Anzeige {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lade das Bild von der URL
-                ImageIcon imageIcon = new ImageIcon(imageUrl);
 
-                // Zeige das Bild in einem JoptionPane-Dialogfeld
-                JOptionPane.showInputDialog(
-                        frame,
-                        new JLabel(imageIcon),
-                        "Bild von URL",
-                        JOptionPane.PLAIN_MESSAGE
-                );
-            }
+                for(int i = 0; i < rechtschreibtrainer.getArrayList().size();i++){
+                    ImageIcon imageIcon = new ImageIcon(rechtschreibtrainer.getWortEintrag(i).getURL());
+                    // Zeige das Bild in einem JoptionPane-Dialogfeld
+                   String wort = (String)JOptionPane.showInputDialog(frame, new JLabel(imageIcon), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                   if(wort.equals(rechtschreibtrainer.getWortEintrag(i).getWort())){
+                       rechtschreibtrainer.statistik(true);
+                       JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                   }else{
+                       rechtschreibtrainer.statistik(false);
+                       JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                   }
+                }
+                frame.setVisible(false);
+                // Lade das Bild von der URL
+                }
         });
         frame.add(button);
         frame.setSize(300, 200);
         frame.setLocationRelativeTo(null);
     }
+
 
     public void anzeige(){
         frame.setVisible(true);
