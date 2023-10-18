@@ -1,6 +1,7 @@
 package model;
 import javax.swing.*;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -17,8 +18,23 @@ public class WortEintrag {
         setWort(wort);
     }
 
-    public boolean urlChecker(String url){
+    public boolean urlChecker(){
+        String urlToCheck = "https://www.example.com"; // Replace with the URL you want to check
+        try {
+            URL url = new URL(urlToCheck);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("URL is valid and accessible.");
+            } else {
+                System.out.println("URL is not accessible. HTTP Response Code: " + responseCode);
+            }
+        } catch (IOException e) {
+            System.out.println("URL is not valid or an error occurred: " + e.getMessage());
+        }
         return false;
     }
 
