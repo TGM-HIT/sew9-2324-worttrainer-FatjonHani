@@ -53,11 +53,6 @@ public class WortMain {
         Session session = new Session(new FileSessionStorageStrategy());
         session.save();
         session.load();
-
-        // Switch to a DatabaseSessionStorageStrategy
-        session.setSessionStorageStrategy(new DatabaseSessionStorageStrategy());
-        session.save();
-        session.load();
         }
     }
 
