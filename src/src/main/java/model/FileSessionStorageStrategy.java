@@ -1,22 +1,45 @@
-package model;
-
-import jdk.internal.util.jar.JarIndex;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileSessionStorageStrategy implements SessionStorageStrategy {
+
+    private String sessionFileName;
+
+    public FileSessionStorageStrategy(String sessionFileName) {
+        this.sessionFileName = sessionFileName;
+    }
+
     @Override
     public void saveSession() {
-        // Implement the logic to save the session to a file
-        String data = "This is a sample text that we are writing to a file.";
-        byte[] bytes = data.getBytes();
-
-    }
-        System.out.println("Session saved to a file.");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(sessionFileName);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(SessionData.getSessionData());
+            objectOutputStream.close();
+            fileOutputStream.close();
+            System.out.println("Session saved to a file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void loadSession() {
-        // Implement the logic to load the session from a file
-        System.out.println("Session loaded from a file.");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(sessionFileName);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            SessionData.setSessionData((Map<String, Object>) objectInputStream.readObject());
+            objectInputStream.close();
+            fileInputStream.close();
+            System.out.println("Session loaded from a file.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
-

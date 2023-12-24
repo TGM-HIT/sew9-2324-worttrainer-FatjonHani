@@ -1,7 +1,11 @@
 package model;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface SessionStorageStrategy {
-    void saveSession();
+
     void loadSession();
+    void saveSession();
 }
