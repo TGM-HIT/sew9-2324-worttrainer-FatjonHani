@@ -42,4 +42,8 @@ public class FileSessionStorageStrategy implements SessionStorageStrategy {
             e.printStackTrace();
         }
     }
+
+    public void setSessionFileName(String sessionFileName){
+        this.sessionFileName = sessionFileName;
+    }
 }
