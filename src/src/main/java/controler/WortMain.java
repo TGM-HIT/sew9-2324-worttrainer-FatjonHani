@@ -24,9 +24,13 @@ public class WortMain {
             ArrayList<WortEintrag> list = new ArrayList<>();
             list.add(hund);
             list.add(kazte);
-
             list.add(maus);
+
             Rechtschreibtrainer rechtschreibtrainer = new Rechtschreibtrainer(list);
+
+            FileSessionStorageStrategy speicherStrategie = new FileSessionStorageStrategy("C:\\Users\\fatjo\\OneDrive\\Desktop");
+
+           //Session session = new Session((SessionStorageStrategy) speicherStrategie);
 
             Anzeige anzeige = new Anzeige(rechtschreibtrainer);
             anzeige.anzeige();
@@ -50,7 +54,17 @@ public class WortMain {
             System.out.println("Aktuelles Paar: " + currentPair);*/
 
         // Create a Session with a FileSessionStorageStrategy
-        Session session = new Session(new FileSessionStorageStrategy());
+        Session session = new Session(new SessionStorageStrategy() {
+            @Override
+            public void loadSession() {
+
+            }
+
+            @Override
+            public void saveSession() {
+
+            }
+        });
         session.save();
         session.load();
         }

@@ -1,49 +1,32 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Map;
 
-public class FileSessionStorageStrategy implements SessionStorageStrategy {
+import java.io.*;
 
-    private String sessionFileName;
+public class FileSessionStorageStrategy extends StorageStrategy {
+    private final String filePath;
 
-    public FileSessionStorageStrategy() {
-        this.sessionFileName = sessionFileName;
+    public FileSessionStorageStrategy(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
-    public void saveSession() {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(sessionFileName);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(SessionData.getSessionData());
-            objectOutputStream.close();
-            fileOutputStream.close();
-            System.out.println("Session saved to a file.");
+    public void save(Session session) throws FileNotFoundException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            oos.writeObject(session);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void loadSession() {
-        try {
-            FileInputStream fileInputStream = new FileInputStream(sessionFileName);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            SessionData.setSessionData((Map<String, Object>) objectInputStream.readObject());
-            objectInputStream.close();
-            fileInputStream.close();
-            System.out.println("Session loaded from a file.");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+    public Session load() throws ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            return (Session) ois.readObject();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    public void setSessionFileName(String sessionFileName){
-        this.sessionFileName = sessionFileName;
     }
 }
