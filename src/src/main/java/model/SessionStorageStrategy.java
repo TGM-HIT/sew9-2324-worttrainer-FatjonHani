@@ -1,11 +1,8 @@
 package model;
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface SessionStorageStrategy {
-
-    void loadSession();
-    void saveSession();
+    void save(Rechtschreibtrainer rechtschreibtrainer, String filePath);
+    Rechtschreibtrainer load(String filePath);
 }

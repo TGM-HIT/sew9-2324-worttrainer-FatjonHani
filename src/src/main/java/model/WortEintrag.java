@@ -1,4 +1,6 @@
 package model;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -7,7 +9,11 @@ import java.net.URL;
 
 
 public class WortEintrag {
+
+    @JsonProperty("url")
     private URL url = new URL("https://www.computerhope.com/jargon/e/error.png") ;
+
+    @JsonProperty("wort")
     private String wort;
 
     public WortEintrag() throws MalformedURLException {

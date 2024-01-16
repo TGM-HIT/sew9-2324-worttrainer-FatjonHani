@@ -21,7 +21,6 @@ public class Anzeige {
         frame = new JFrame("Welches Word könnte das sein?");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         JButton button = new JButton("Zeige das Bild");
         button.addActionListener(new ActionListener() {
             @Override
