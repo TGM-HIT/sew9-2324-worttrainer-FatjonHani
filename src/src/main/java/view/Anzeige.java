@@ -5,6 +5,7 @@ import model.Rechtschreibtrainer;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Anzeige {
@@ -27,21 +28,29 @@ public class Anzeige {
             public void actionPerformed(ActionEvent e) {
 
                 for(int i = 0; i < rechtschreibtrainer.getArrayList().size();i++){
-                    ImageIcon imageIcon = new ImageIcon(rechtschreibtrainer.getWortEintrag(i).getURL());
+                    ImageIcon imageIcon = null;
+                    try {
+                        // Convert the String URL back to a URL object
+                        URL url = new URL(rechtschreibtrainer.getWortEintrag(i).getURL());
+                        imageIcon = new ImageIcon(url);
+                    } catch (MalformedURLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     // Zeige das Bild in einem JoptionPane-Dialogfeld
-                   String wort = (String)JOptionPane.showInputDialog(frame, new JLabel(imageIcon), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
-                   if(wort.equals(rechtschreibtrainer.getWortEintrag(i).getWort())){
-                       rechtschreibtrainer.statistik(true);
-                       JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
-                   }else{
-                       rechtschreibtrainer.statistik(false);
-                       JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
-                   }
+                    String wort = (String)JOptionPane.showInputDialog(frame, new JLabel(imageIcon), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                    if(wort.equals(rechtschreibtrainer.getWortEintrag(i).getWort())){
+                        rechtschreibtrainer.statistik(true);
+                        JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                    }else{
+                        rechtschreibtrainer.statistik(false);
+                        JOptionPane.showMessageDialog(null,rechtschreibtrainer.printStatistik(), "Bild von URL", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
                 frame.setVisible(false);
                 // Lade das Bild von der URL
-                }
+            }
         });
+
         frame.add(button);
         frame.setSize(300, 200);
         frame.setLocationRelativeTo(null);

@@ -3,31 +3,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 
-public class WortEintrag {
+public class WortEintrag implements Serializable {
 
     @JsonProperty("url")
-    private URL url = new URL("https://www.computerhope.com/jargon/e/error.png") ;
+    private String url;
 
     @JsonProperty("wort")
     private String wort;
 
+    /**
+     * Default Consturctor with the URL of an Dog Image and the name Hund
+     *
+     */
     public WortEintrag() throws MalformedURLException {
         this.wort = "Hund";
+        String urlGiven = "https://static.nationalgeographic.de/files/styles/image_3200/public/01-domesticated-dog.jpg?w=400&h=400&q=75";
+        this.url = urlGiven ;
+
+
     }
-    public WortEintrag(URL url, String wort) throws MalformedURLException {
+
+    /**
+     * Checks if the Given URL is right
+     *
+     * @param url the url of the Image
+     * @param wort the Name of the Object in the Image
+     */
+    public WortEintrag(String url, String wort)  {
         setURL(url);
         setWort(wort);
     }
 
-    public boolean urlChecker(){
-        String urlToCheck = "https://www.example.com"; // Replace with the URL you want to check
+    /**
+     * Checks if the Given URL is right
+     *
+     * @param urlGiven
+     */
+    public boolean urlChecker(String urlGiven){
         try {
-            URL url = new URL(urlToCheck);
+            URL url = new URL(urlGiven);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -44,8 +64,13 @@ public class WortEintrag {
         return false;
     }
 
-    public String getWort(){
 
+    /**
+     * gets the the Wort
+     *
+     *
+     */
+    public String getWort(){
         if(this.wort != null){
             return this.wort;
         }else {
@@ -53,18 +78,34 @@ public class WortEintrag {
         }
     }
 
-    public URL getURL(){
+    /**
+     * gets the the url
+     *
+     *
+     */
+    public String getURL(){
         if(this.url != null){
             return this.url;
         }else {
             return null;
         }
     }
-    public ImageIcon getImage() throws IOException {
+
+    /**
+     * gets the the Image from the url
+     *
+     *
+     */
+    public ImageIcon getImage() {
+
         return new ImageIcon(url);
     }
-
-    public void setURL(URL url){
+    /**
+     * sets the url Attribute
+     *
+     * @param url to set wort
+     */
+    public void setURL(String url){
         if(url != null){
              this.url = url;
         }else {
@@ -72,6 +113,11 @@ public class WortEintrag {
         }
     }
 
+    /**
+     * sets the Wort Attribute
+     *
+     * @param wort to set wort
+     */
     public void setWort(String wort){
         if(wort != null){
             this.wort = wort;
